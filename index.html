@@ -6,6 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="./styles/index.css">
 </head>
 <body>
+
+<!--app  ! must has 'theme' class-->
 <div id="fika" class="f-app theme-blabar">
 	<!--drawer-->
 	<div class="f-drawer-btn">
@@ -31,12 +33,12 @@
 			</svg>
 			<span>My Highlight</span>
 		</div>
-		<div class="f-drawer-tile">
+		<div class="f-drawer-tile f-appearance-toggle">
 			<svg class="f-icon" viewBox="0 0 24 24">
 				<path d="M21.94,18.66l-5-14a1,1,0,0,0-1.88,0L10.48,17.48,7.43,9.64a1,1,0,0,0-1.86,0l-3.5,9a1,1,0,1,0,1.86.72l.66-1.68H8.41l.66,1.68A1,1,0,0,0,10,20a.92.92,0,0,0,.36-.07.67.67,0,0,0,.14-.09.7.7,0,0,0,.16.1,1,1,0,0,0,1.28-.6l1-2.84h6.1l1,2.84A1,1,0,0,0,21,20a1,1,0,0,0,.34-.06A1,1,0,0,0,21.94,18.66Zm-16.58-3L6.5,12.76l1.14,2.92Zm8.31-1.18L16,8l2.33,6.53Z"/></svg>
 			<span>Appearance</span>
 		</div>
-		<div class="pa-1">
+		<div class="pa-1 f-appearance" style="display: none;">
 			<!--font size selection-->
 			<div class="f-select-label">text size</div>
 			<div class="f-select-sizes">
@@ -55,16 +57,31 @@
 			<!--font selection-->
 			<div class="f-select-label">Font</div>
 			<div class="f-select-fonts">
-				<div class="f-select-font active">Courier</div>
-				<div class="f-select-font">Georgia</div>
-				<div class="f-select-font">Merriweather</div>
-				<div class="f-select-font">Open Sans</div>
-				<div class="f-select-font">Palatino</div>
-				<div class="f-select-font">Verdana</div>
+				<div class="f-select-font courier active">Courier</div>
+				<div class="f-select-font georgia">Georgia</div>
+				<div class="f-select-font merriweather">Merriweather</div>
+				<div class="f-select-font open-sans">Open Sans</div>
+				<div class="f-select-font palatino">Palatino</div>
+				<div class="f-select-font verdana">Verdana</div>
 			</div>
-
-
 		</div>
+		<hr class="my-2">
+
+		<div class="f-toc">
+			<h1>What is a Microinteraction Anyway?</h1>
+				<div class="f-hl">Details are what keep them there. And details are what actually make our app stand out from our competition.</div>
+			<h1>Why Microinteractions Work</h1>
+			<h1>Identifying Opportunities</h1>
+				<h2>Show System Status</h2>
+				<h2>Highlight Changes</h2>
+				<h3>Keep Context</h3>
+				<h4>Visualize Input</h4>
+				<h5>Call to Action</h5>
+			<h1>Things to Remember</h1>
+			<h1>Conclusion</h1>
+		</div>
+
+
 	</div>
 
 	<!--overlay-->
@@ -72,7 +89,8 @@
 	<!--paper-->
 	<div class="f-paper">
 
-		<div class="f-article f-size-medium">
+		<!--article  ! must has 'f-size' and 'f-font' class-->
+		<div class="f-article f-size-medium f-font-geogia">
 
 			<h1 class="f-title">
 				Microinteractions: The Secret of Great App Design
@@ -81,11 +99,14 @@
 				By Nick Babich
 			</div>
 
-			<!--sample article content-->
+			<!--sample article content -->
 			<div class="f-content">
-				<img src="https://cdn-images-1.medium.com/max/800/0*Qf6LRFopRLXwmofr.jpg">
+				<img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80">
 				<figcaption>An example of a microinteraction that we experience in daily life.</figcaption>
-				<p>The best products do two things well: features and details. Features are what draw people to your product. Details are what keep them there. And details are what actually make our app stand out from our competition.</p>
+				<p>The best products do two things well: features and details. Features are what draw people to your product.
+					<!--hightlight-->
+					<span class="f-hl">Details are what keep them there. And details are what actually make our app stand out from our competition.</span>
+				</p>
 				<p>Microinteractions are one of the best techniques for giving delightful feedback.</p>
 				<blockquote>All roads lead to a human-centered design approach, where the user is the prime focus. Often considered accessory or secondary, microinteractions actually create a feeling of well-being once they are discovered by users. As a designer, recognizing the invisibility of microinteractions is just as important as designing them. You have to create something that feels human and accomplishes a task.</blockquote>
 				<h1>What is a Microinteraction Anyway?</h1>

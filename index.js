@@ -111,13 +111,24 @@ const settings = {
 		cont: document.querySelector('.f-app'),
 		selects: document.querySelectorAll('.f-select-theme'),
 		classPrefix: 'theme'
+	},
+	font:{
+		activeVal: localStorage.getItem('font') || 'Georgia',
+		cont: document.querySelector('.f-article'),
+		selects: document.querySelectorAll('.f-select-font'),
+		classPrefix: 'f-font'
 	}
 }
 
 function setAppearance(prop, val){
 	// change class name (theme) for app
-	const cont = settings[prop].cont
-	const oldVal = cont.classList.item(1)
+	let oldVal, cont = settings[prop].cont
+	 cont.classList.forEach(c=>{
+	 	if (c.startsWith(settings[prop].classPrefix)){
+	 		oldVal = c
+		  console.log(oldVal)
+	  }
+	 })
   cont.classList.replace(oldVal, `${settings[prop].classPrefix}-${val}`)
 	// change state and storage
   settings[prop].activeVal = val
@@ -134,8 +145,13 @@ function setAppearance(prop, val){
 // set theme from localStorage
 setAppearance('theme', settings['theme'].activeVal)
 setAppearance('fontSize', settings['fontSize'].activeVal)
+setAppearance('font', settings['font'].activeVal)
 
 // binding appearance button click event
+document.querySelector('.f-appearance-toggle').addEventListener('click', ()=>{
+	const el = document.querySelector('.f-appearance')
+	el.style.display = el.style.display === "none" ? "block" : "none";
+}, false)
 Array.from(settings['theme'].selects).forEach(el=>{
 	el.addEventListener('click', ()=>{
 		setAppearance('theme',el.classList.item(1))
@@ -146,6 +162,8 @@ Array.from(settings['fontSize'].selects).forEach(el=>{
     setAppearance('fontSize',el.classList.item(1))
   })
 })
-
-
-/* Font */
+Array.from(settings['font'].selects).forEach(el=>{
+	el.addEventListener('click', ()=>{
+		setAppearance('font',el.classList.item(1))
+	})
+})

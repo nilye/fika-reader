@@ -1,8 +1,8 @@
 spacer := 8px
 directions = a y x l r t b
 $spacing(prop, dir, level)
-  // outputs according to levels: 0px 8px 16 24 32 48 64 80
-  levels = 0 1 2 3 4 6 8 10
+  // outputs according to levels: 0px 8px 16 24 32 48 64 80 96
+  levels = 0 1 2 3 4 6 8 10 12
   space = level == auto ? auto : spacer*levels[level]
   if dir == a
     {prop}: space
