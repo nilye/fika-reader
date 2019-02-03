@@ -1,0 +1,69 @@
+@import "../variables.styl"
+
+/*! Select */
+
+f-select($theme)
+  &-sizes
+    background: $theme.bg
+
+  &-size
+    &.active
+      background: $theme.accent
+
+  &-theme
+    border: solid 1px $theme.text
+    &.active
+      transform scale(1.1)
+      border: solid 4px $theme.accent
+
+
+theme(f-select, "f-select")
+
+for $name, $theme in $themes
+  .f-select-theme.{$name}
+    background: $theme.paper
+
+.f-select
+  &-label
+    $margin(t, 3)
+    $margin(b, 1)
+    font-size 10px
+    text-transform uppercase
+    opacity 0.6
+
+  &-sizes
+    height 32px
+    width 100%
+    radius(8px)
+    display flex
+    overflow hidden
+
+    & .f-select-size
+      cursor pointer
+      flex: 1 1 auto
+      text-align center
+      text-transform uppercase
+      font-weight bold
+      $center()
+      short-transition()
+
+      &.small
+        font-size:12px
+
+      &.medium
+        font-size:14px
+
+      &.large
+        font-size:16px
+
+
+  &-themes
+    display flex
+
+    & .f-select-theme
+      cursor pointer
+      $margin(r, 2)
+      border-radius 50%
+      height 40px
+      width 40px
+      short-transition()
