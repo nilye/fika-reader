@@ -96,39 +96,56 @@ window.addEventListener('resize', ()=>{
 	drawer.w = w
 })
 
-/* Font Size */
-let activeFontSize = localStorage.getItem('size') || 'medium'
 
 
-/* Theme */
-let activeTheme = localStorage.getItem('theme') || 'vanilla'
-let themeSelects = document.querySelectorAll('.f-select-theme')
+/* Appearance */
+const settings = {
+  fontSize: {
+  	activeVal: localStorage.getItem('fontSize') || 'medium',
+    cont: document.querySelector('.f-article'),
+		selects: document.querySelectorAll('.f-select-size'),
+		classPrefix: 'f-size'
+  },
+	theme: {
+  	activeVal: localStorage.getItem('theme') || 'vanilla',
+		cont: document.querySelector('.f-app'),
+		selects: document.querySelectorAll('.f-select-theme'),
+		classPrefix: 'theme'
+	}
+}
 
-
-function setTheme(theme){
+function setAppearance(prop, val){
 	// change class name (theme) for app
-	const appEl = document.querySelector('.f-app')
-	const oldTheme = appEl.classList.item(1)
-	appEl.classList.replace(oldTheme, 'theme-'+theme)
+	const cont = settings[prop].cont
+	const oldVal = cont.classList.item(1)
+  cont.classList.replace(oldVal, `${settings[prop].classPrefix}-${val}`)
 	// change state and storage
-	localStorage.setItem('theme', theme)
+  settings[prop].activeVal = val
+	localStorage.setItem(prop, val)
 	// change class name for ctrl btns
-	for (let el of themeSelects){
+	for (let el of settings[prop].selects){
 		el.classList.remove('active')
-		if (el.classList.contains(theme)){
+		if (el.classList.contains(val)){
 			el.classList.add('active')
 		}
 	}
 }
 
 // set theme from localStorage
-setTheme(activeTheme)
+setAppearance('theme', settings['theme'].activeVal)
+setAppearance('fontSize', settings['fontSize'].activeVal)
 
-// binding theme button click event
-Array.from(themeSelects).forEach(el=>{
+// binding appearance button click event
+Array.from(settings['theme'].selects).forEach(el=>{
 	el.addEventListener('click', ()=>{
-		const theme = el.classList.item(1)
-		activeTheme = theme
-		setTheme(theme)
+		setAppearance('theme',el.classList.item(1))
 	})
 })
+Array.from(settings['fontSize'].selects).forEach(el=>{
+  el.addEventListener('click', ()=>{
+    setAppearance('fontSize',el.classList.item(1))
+  })
+})
+
+
+/* Font */
