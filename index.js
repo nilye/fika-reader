@@ -113,7 +113,7 @@ const settings = {
 		classPrefix: 'theme'
 	},
 	font:{
-		activeVal: localStorage.getItem('font') || 'Georgia',
+		activeVal: localStorage.getItem('font') || 'georgia',
 		cont: document.querySelector('.f-article'),
 		selects: document.querySelectorAll('.f-select-font'),
 		classPrefix: 'f-font'
