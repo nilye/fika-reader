@@ -1,5 +1,13 @@
 @import "../variables.styl"
 
+f-toc($theme)
+  a
+    & ,&:link ,&:visited ,&:active
+      color: $theme.text
+
+
+theme(f-toc, 'f-toc')
+
 .f-toc
   sans-serif()
   $padding(a, 1)
@@ -8,7 +16,6 @@
     text-overflow ellipsis
     overflow hidden
     $margin(b, 3)
-    $margin(t, 0)
     cursor pointer
     font-weight normal
     &:hover
@@ -20,20 +27,22 @@
     $margin(l, 2)
   a
     display block
-    &.h1
+    *
+      $margin(y,0)
+    h1
       font-size: 16px
-    &.h2
+    h2
       font-size: 14px
       padding-left:8px
-    &.h3
+    h3
       font-size: 14px
       padding-left:12px
-    &.h4
+    h4
       font-size: 13px
       padding-left:16px
-    &.h5
+    h5
       font-size: 13px
       padding-left:20px
-    &.h6
+    h6
       font-size: 12px
       padding-left:24px
