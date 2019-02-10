@@ -6,6 +6,11 @@ f-drawer($theme)
   background: $theme.paper
   color: $theme.text
 
+  &::-webkit-scrollbar-thumb
+    background: rgba($theme.text, 0.35)
+  &::-webkit-scrollbar-thumb:hover
+    background: rgba($theme.text,0.6)
+
   &-btn
     background: tint($theme.text, 20%)
     color: $theme.paper
@@ -22,15 +27,25 @@ theme(f-drawer, 'f-drawer')
 
 .f-drawer
   position fixed
-  left -352px
+  left -375px
   top 0
   height 100vh
-  width 352px
+  width 375px
   $padding(a, 2)
   sans-serif()
   drawer-transition()
   z-index 1
   overflow-y auto
+  &::-webkit-scrollbar
+    width: 6px
+    height: 6px
+    -webkit-appearance: none
+  &::-webkit-scrollbar-track
+    background:transparent
+  &::-webkit-scrollbar-thumb
+    border-radius: 6px
+  &::-webkit-scrollbar-thumb:hover
+    opacity 1
 
   &-on
     left:0
@@ -55,6 +70,21 @@ theme(f-drawer, 'f-drawer')
     &:hover
       transform translateX(16px)
 
+  &-content
+    $margin(t, 4)
+    overflow hidden
+
+    &-wrap
+      display flex
+      transition: 0.3s $transition.fast-in-fast-out
+
+      > *
+        width 100%
+        min-width 100%
+        $margin(r, 2)
+        $padding(a, 1)
+
+  /*
   &-tile
     $padding(a, 1)
     radius(4px)
@@ -66,5 +96,4 @@ theme(f-drawer, 'f-drawer')
     span
       font-size: 16px
       $margin(l, 2)
-
-
+  */
