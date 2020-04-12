@@ -1,0 +1,42 @@
+
+
+/*! Feedback */
+
+share($theme)
+  &-divider
+    border-top: 1px solid $border-color($theme)
+
+  &-buttons
+    a
+      color: $theme.text
+
+
+theme(share, "share")
+
+.fika-app
+  .fika-share
+    sans-serif()
+    text-align: center
+    font-size: 16px
+    $margin(y, 7)
+    @media print
+      display none
+
+    &-divider
+      $margin(y, 2)
+      $margin(x, auto)
+      width: 120px
+
+    &-buttons
+      display flex
+      justify-content center
+
+      a
+        text-decoration none
+        opacity 0.5
+
+        &:hover
+          opacity 1
+
+  .fika-share-fika
+    //display none

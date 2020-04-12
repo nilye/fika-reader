@@ -1,0 +1,76 @@
+prefix := fika
+$resource-url = 'chrome-extension://fbcdnjeoghampomjjaahjgjghdjdbbcj/'
+
+sans-serif()
+  font-family: -apple-system,Helvetica,Roboto, Arial, sans-serif
+
+monospace()
+  font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+
+radius(radius = 8px)
+  border-radius: radius
+
+$hover-opacity := 0.12
+
+$shadows-opacity := rgba(0,0,0, .1)
+$shadows := 0 8px 16px 0 rgba(0,0,0, .09),
+            0 12px 24px 0 rgba(0,0,0, .18)
+
+shadow($depth = 1, important = false)
+  box-shadow: $shadows[$depth - 1]  (important ? !important : )
+
+$transition := {
+  fast-out-slow-in: cubic-bezier(0.4, 0.0, 0.2, 1),
+  linear-out-slow-in: cubic-bezier(0.0, 0.0, 0.2, 1),
+  fast-out-linear-in: cubic-bezier(0.4, 0.0, 1, 1),
+  ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1),
+  fast-in-fast-out: cubic-bezier(.25,.8,.25,1),
+  swing: cubic-bezier(.25,.8,.50,1)
+}
+
+short-transition()
+  transition: 0.15s $transition.ease-in-out
+
+medium-transition()
+  transition: 0.3s $transition.fast-in-fast-out
+
+long-transition()
+  transition: 0.4s $transition.ease-in-out
+
+$center()
+  display flex
+  align-items center
+  justify-content center
+
+$scroll-bar-color($theme)
+  &::-webkit-scrollbar-thumb
+    background: rgba($theme.text, 0.2)
+  &::-webkit-scrollbar-thumb:hover
+    background: rgba($theme.text,0.5)
+
+$border-opacity := 0.2
+$border-color($theme)
+  return rgba($theme.text, $border-opacity)
+
+
+$scroll-bar()
+  &::-webkit-scrollbar
+    width: 6px
+    height: 6px
+    -webkit-appearance: none
+  &::-webkit-scrollbar-track
+    background:transparent
+  &::-webkit-scrollbar-thumb
+    border-radius: 6px
+  &::-webkit-scrollbar-thumb:hover
+    opacity 1
+
+$z-index(item)
+  if item == tool
+    z-index 100
+  else if item == menu
+    z-index 50
+  else if item == overlay
+    z-index 10
+  else if item == main
+    z-index: 5

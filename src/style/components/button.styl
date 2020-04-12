@@ -1,0 +1,78 @@
+
+
+/*! Button */
+
+btn($theme)
+  &:not(.s-btn):hover
+    color: inherit !important
+    background: rgba($theme.text, $hover-opacity) !important
+
+  &:not(.s-btn):focus
+    background: none  !important
+    color: inherit !important
+
+  &.active
+    border: 2px solid $theme.accent
+    color: $theme.accent
+
+theme(btn, "btn")
+
+.fika-app
+  button.fika-btn
+  .fika-btn
+    $center()
+    display: inline-flex
+    radius(4px)
+    height: 36px
+    $padding(x,1)
+    $padding(y,0)
+    color: inherit
+    cursor: pointer
+    font-size: 14px
+    background: none
+
+    & > *
+      pointer-events: none
+
+    &-icon
+      width: 36px
+      border-radius: 100%
+      $padding(a, 0)
+
+    &.fika-btn-small
+      width: 100px !important
+      color:#fff
+      font-size: 14px
+      height: 24px
+      border-radius: 4px
+      padding-right: 0 12px 0 8px !important
+
+    &.fika-btn-left
+      text-align: left
+      justify-content start
+
+    &.fika-btn-large.fika-btn-icon
+      height: 48px
+      width: 48px
+
+    &.fika-btn-depress
+      opacity 0.4
+
+      &:hover
+      &.active
+        opacity 1
+
+
+.fika-app
+  button.fika-btn
+    &
+    &:focus
+    &:visited
+    &:hover
+    &:active
+      border: none
+      outline: none
+      text-decoration: none
+      apprearance: none
+      -webkit-appearance: none
+      box-shadow: none

@@ -1,0 +1,224 @@
+
+
+/*! Article */
+article($theme)
+  &-divider
+    border-bottom-color: $border-color($theme)
+
+  &-domain
+    color: rgba($theme.text, 0.7)
+
+  table
+    td, th
+      border:1px solid $border-color($theme)
+
+  blockquote
+    border-left:5px solid $border-color($theme)
+
+  pre
+  code
+    background: $theme.bg
+    $scroll-bar-color($theme)
+
+  a
+  h1
+  h2
+  h3
+  h4
+  h5
+  h6
+  p
+  li
+  sup
+  sub
+  table
+  blockquote
+    color: $theme.text !important
+
+
+theme(article, "article")
+
+$block-item()
+  $margin(y, 4)
+  display block
+
+.fika-app
+  .fika-article
+    margin 32px auto
+    max-width: 720px
+    position relative
+
+    &-title
+      $margin(t, 0)
+      $margin(b, 5)
+      font-size: 40px
+      line-height 52px
+      font-weight bold
+      text-align: left
+
+      &::before
+      &::after
+        display none
+
+    &-divider
+      width:100%
+      $margin(y, 3)
+      border-bottom-width 2px
+      border-bottom-style solid
+
+    &-domain
+      display flex
+      font-size 14px
+      font-weight bolder
+      $margin(b, 2)
+
+      img
+        height 16px !important
+        width 16px !important
+        $margin(r, 1)
+
+    &.align-justify
+      .fika-content
+        p
+        li
+        blockquote
+        div
+         text-align justify
+        h1
+        h2
+        h3
+        h4
+        h5
+        h6
+          text-align left !important
+
+
+  // rich text
+  .fika-content
+    $margin(t, 5)
+    line-height 1.6
+    word-break: break-word
+
+    *
+      line-height 1.6
+      word-break: break-word
+
+    h1
+    h2
+    h3
+    h4
+    h5
+    h6
+      font-weight bold
+      $margin(t, 5)
+      $margin(b, 4)
+      *
+        font-weight bold
+
+
+    p
+      $block-item()
+
+    a
+      cursor pointer
+      & ,&:link ,&:visited ,&:active
+        text-decoration underline
+      &:hover
+      &:hover *
+        color:$primary.dark !important
+
+    img
+      max-width: 100%
+      object-fit: cover
+      $margin(x, auto)
+
+    code
+    pre
+      font-family: monospace
+
+    code
+      overflow: visible
+
+    pre
+      $block-item()
+      $padding(a, 2)
+      line-height: 1.2 !important;
+      overflow: auto
+      $scroll-bar()
+
+      code
+        padding: 0px !important
+
+    ol
+      display: block;
+      list-style-type: decimal;
+      padding-inline-start: 24px;
+
+    ul
+      display: block;
+      list-style-type: disc;
+      padding-inline-start: 24px;
+
+    li
+      display list-item
+
+    div
+      $margin(y, 1)
+
+    figure
+      $block-item()
+      $margin(x, 0)
+
+      img
+        display block
+
+    figcaption
+      sans-serif()
+      font-size: 15px !important
+      opacity: 0.5
+      text-align: center
+      $margin(b, 2)
+      *
+        font-size: inherit !important
+
+    blockquote
+      $block-item()
+      font-style: italic;
+      $margin(x, 0)
+      padding: 0 0 0 32px;
+
+    table
+      $block-item()
+      width: 100%;
+      overflow: auto;
+      border-collapse: collapse;
+      td, th
+        $padding(a, 1)
+        font-size: 75%
+
+    sup
+    sub
+      line-height: 1
+
+    video
+      $block-item()
+
+    iframe
+      $block-item()
+      border:none
+      &[src^="https://player.vimeo.com/video"]
+      &[src^="https://www.youtube.com/embed"]
+        width:100%
+        height:394px
+
+    nav
+    button
+      display none
+
+    article
+      float: none !important
+      
+    *
+      &:before
+      &:after
+        display none

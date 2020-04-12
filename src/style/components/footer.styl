@@ -1,0 +1,57 @@
+
+
+/*! Footer */
+
+footer($theme)
+  color: rgba($theme.text, 0.5);
+
+
+theme(footer, "footer")
+
+
+.fika-app
+  .fika-footer
+    display: flex;
+    justify-content: space-between;
+    $margin(t, 3)
+    @media screen and (max-width: 992px) and (min-width: 700px)
+      $margin(x, 5)
+
+
+    a
+      & ,&:link ,&:visited ,&:active
+        color currentColor
+        text-decoration none
+
+    &-logo
+      display flex
+      align-items center
+
+      img
+        $margin(r, 2)
+        height 36px
+        width 36px
+
+    &-share
+      display flex
+      align-items center
+      color currentColor
+      text-decoration none
+      @media print
+        display none
+
+
+.fika-feedback
+  text-align center
+
+  &-button-active.fika-feedback-button.fika-btn.fika-btn-depress
+    opacity 1
+
+  #fika-feedback-msg
+    a
+      cursor pointer
+      color: $primary.dark !important;
+      text-decoration underline
+
+      & ,&:link ,&:visited ,&:active
+        text-decoration underline

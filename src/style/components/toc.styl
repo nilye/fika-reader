@@ -1,0 +1,121 @@
+
+
+toc($theme)
+  a
+    color: $theme.text
+    $margin(a, 0)
+    font-weight normal
+    sans-serif()
+    &:link ,&:visited ,&:active, &:not([href]):not([tabindex])
+      color: $theme.text
+
+
+  &-static
+    $scroll-bar-color($theme)
+
+theme(toc, "toc")
+
+
+$toc-h()
+  $padding(r, 0)
+  line-height 1.5
+  overflow: hidden
+  position: relative
+
+$bullet(p)
+  padding-left: p
+  &:before
+    content: ''
+    position:absolute
+    height 4px
+    width 4px
+    border-radius 50%
+    background currentColor
+    opacity 0.8
+    left: p - 14 // 4 content + 8 padding
+    top: 50%
+    margin-top: - 2px
+
+
+.fika-app
+  .fika-toc
+    sans-serif()
+    position relative
+
+    &-static
+      overflow-y: auto;
+      word-break: break-word;
+      height: calc(100vh - 120px);
+      position: fixed
+      top: 64px
+      right: 50%
+      width: 240px
+      margin-right: 408px;
+      $padding(a, 2)
+      $padding(r, 1)
+      $scroll-bar()
+
+      //off state
+      opacity 0
+      transform: translateX(-24px)
+      short-transition()
+      // responsive
+      @media screen and (max-width: 1264px)
+        display none
+
+      @media screen and (min-width: 1440px)
+        margin-right: 448px
+
+      &-active
+        transform: translateX(0)
+        opacity 1
+
+    a
+      display: block
+      padding: 4px 0 2px 0
+      margin-bottom: 4px
+      cursor: pointer
+      text-decoration: none
+      font-weight normal
+      text-overflow: ellipsis
+      display: -webkit-box
+      -webkit-line-clamp: 2
+      -webkit-box-orient: vertical
+      -webkit-text-fill-color: inherit
+      overflow: hidden
+      border-left: 2px solid transparent
+
+      &.fika-toc-active
+        border-left: 2px solid $primary.dark
+
+      &.fika-toc-
+        &h1
+          $toc-h()
+          font-size: 16px !important
+          opacity 1
+          padding-left:6px
+        &h2
+          $toc-h()
+          $bullet(20px)
+          font-size: 14px !important
+          opacity 0.8
+        &h3
+          $toc-h()
+          $bullet(28px)
+          font-size: 13px !important
+          opacity 0.64
+        &h4
+          $toc-h()
+          $bullet(36px)
+          font-size: 13px !important
+          opacity 0.56
+        &h5
+          $toc-h()
+          $bullet(44px)
+          font-size: 12px !important
+          opacity 0.48
+        &h6
+          $toc-h()
+          $bullet(52px)
+          font-size: 12px !important
+          opacity 0.40

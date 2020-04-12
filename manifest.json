@@ -1,0 +1,60 @@
+{
+    "manifest_version": 2,
+    "name": "Fika - Reader Mode",
+    "short_name": "Fika",
+    "version": "0.8.0",
+    "description":"A Kindle-like reading experience for the web.",
+    "homepage_url": "http://www.fika.io",
+    "author":"Fika",
+    "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlRc/NUFDfCfaPI7r+5g/kIO1ktJ6zXqh5cIwaysH1Lvx+ilqjwu2WJ+5//Mw5y2o36+Gx1MSYqF7EIWdDLzpMDv45qG0KlITOEs7A440EE+L1ZzZT0UXY4GKhW+vGMcYd5JMIWZNA2X6R6FX5sU5MC1k58ytL4H4inWseZMo49oJtuSXY20kLE60jAnNhWs3ngq489I8ZAMahb2clVhgVMQOpU2ZMdUHuLvjhgs169LJLDJeKCbm2OMEe7Uhg/sQyxmbVb3bIGTaLssMVxBNQ2SyCpEDqRkgYpTSscqf6PvKzwq6cQMJinSRTLtgMurk6nunkjAh5Zg+wMuCALUSZQIDAQAB",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [{
+        "matches": [
+            "http://*/*",
+            "https://*/*"
+        ],
+        "js": [
+            "index.js"
+        ],
+        "css": [
+            "index.css"
+        ]
+    }],
+    "browser_action": {
+        "default_title": "Fika",
+        "default_icon": "assets/img/logo64-grey.png"
+    },
+    "optional_permissions": [
+        "identity"
+    ],
+    "permissions": [
+        "tabs",
+        "cookies",
+        "contextMenus",
+        "fontSettings",
+        "storage",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "icons": {
+        "16":  "assets/img/logo16.png",
+        "48":  "assets/img/logo64.png",
+        "128": "assets/img/logo128.png"
+    },
+    "web_accessible_resources": [
+        "*.ttf",
+        "assets/img/*"
+    ],
+    "oauth2": {
+        "client_id": "386130166125-uoa0kfcm866v0k5l2mlddenj5fnpobmu.apps.googleusercontent.com",
+        "scopes": [
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email"
+        ]
+    }
+}

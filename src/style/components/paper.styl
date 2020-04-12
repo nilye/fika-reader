@@ -1,0 +1,54 @@
+
+
+/*! Paper */
+
+paper($theme)
+  background: rgba($theme.paper, 0.99)
+  color: $theme.text
+
+theme(paper, "paper")
+
+/* !
+
+breakpoint:
+
+extra small - <= 700px | margin all:0px | width: 100%
+small - 992px | margin x:0px y:52px | width: 100%
+medium - 1264px | margin x:auto y:52px | width: 800px
+large - 1440px =< | width: 880px
+
+*/
+
+
+.fika-app
+  .fika-main-body
+    position relative
+    width: 100%
+    max-width: 800px
+    $margin(x, auto)
+    $margin(t, 4)
+    $margin(b, 8)
+    $z-index(main)
+    @media screen and (min-width: 1440px)
+      max-width: 880px
+
+    @media screen and (max-width: 700px)
+      margin: 0 0 16px 0
+
+
+  .fika-paper
+    position:relative
+    $padding(y, 3)
+    $padding(x, 3)
+    radius()
+    shadow(1)
+
+    @media screen and (max-width: 992px)
+      $margin(x, 5)
+
+    @media screen and (max-width: 700px)
+      margin: 0
+
+    @media print
+      box-shadow none
+      color: #000 !important
