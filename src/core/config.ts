@@ -1,5 +1,5 @@
 export const FAVORED_TAGS = [
-	'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'PRE', 'CODE', 'FIGURE', 'BLOCKQUOTE'
+	'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'PRE', 'CODE', 'FIGURE', 'BLOCKQUOTE', 'UL', 'OL'
 ]
 
 export const EXCLUDE_TAGS = [
@@ -14,6 +14,7 @@ export const EXCLUDE_TAGS = [
 	'SELECT',
 	'ASIDE',
 	'HEADER',
+	'NAV',
 	'FOOTER',
 	'PERSONALIZATION-PLACEMENT'
 ]
@@ -33,7 +34,8 @@ export const NEGATIVE_ATTR = [
 	'page-metadata',
 	'references',
 	'aside',
-	'sidebar',
+	'side',
+	'bar',
 	'crumb',
 	'credit',
 	'date',
@@ -77,6 +79,5 @@ export const POSITIVE_ATTR = [
 	'story',
 	'text',
 ];
-export const PARAGRAPH_TAGS = ['p','li','span','pre']
-export const SECONDARY_TAGS = ['td', 'blockquote', 'ol', 'ul', 'dl']
-
+export const PARAGRAPH_TAGS = ['P','LI','BLOCKQUOTE','SPAN','PRE']
+export const SECONDARY_TAGS = ['TD', 'OL', 'UL', 'DL']

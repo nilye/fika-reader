@@ -1,25 +1,59 @@
-import { EXCLUDE_TAGS} from './config'
-import { Element } from './element'
-import {Score} from "./score";
-
-export type VNodeType = 'txt' | 'inline' | 'block' | false
-
-export interface VNode {
-	type: VNodeType,
-	score: number,
-	text?: string,
-	tag?: string,
-	element?: HTMLElement
-	nodes?: VNode[]
-}
+import { EXCLUDE_TAGS } from './config'
+import { Score } from "./score";
+import {VNode, VNodeType} from "./types";
 
 export const Serializer = {
+
+	displayType(elem: HTMLElement): VNodeType {
+		if (this.isText(elem)){
+			return 'inline'
+		}
+		const display = window.getComputedStyle(elem).display
+		switch(display){
+			case 'inline':
+				return 'inline'
+			case 'none':
+				return false
+			default:
+				return 'block'
+		}
+	},
+
+	isVisible(elem: HTMLElement): boolean{
+		if (this.isText(elem)){
+			elem = elem.parentElement
+		}
+		const rectList = elem.getClientRects()
+		if (rectList.length === 0) return false
+
+		// map width and height
+		let maxWidth = 0, maxHeight = 0
+		for (let i = 0; i < rectList.length; i++){
+			const rect = rectList[i]
+			if (rect.width > maxWidth) maxWidth = rect.width
+			if (rect.height > maxHeight) maxHeight = rect.height
+		}
+
+		return !!(maxWidth > 1 && maxHeight > 1)
+	},
+
+	isText({ nodeType }: HTMLElement): boolean{
+		return nodeType === 3
+	},
+
+	isElement({ nodeType }: HTMLElement): boolean{
+		return nodeType === 1
+	},
+
+	hasChild(node: VNode): boolean{
+		return node.nodes && node.nodes.length > 0
+	},
 
 	/**
 	 * create VNode from a HTML element
 	 * @param elem
 	 */
-	create(elem: HTMLElement): VNode | false{
+	parse(elem: HTMLElement): VNode | false{
 		const { tagName, nodeName, textContent, nodeValue } = elem
 		/*
 		* ignore element for these cases:
@@ -30,59 +64,32 @@ export const Serializer = {
 		*/
 		if (EXCLUDE_TAGS.includes(tagName || nodeName)) return false
 
-		const isText = Element.isText(elem)
+		const isText = this.isText(elem)
 		if (!isText && elem.childNodes.length == 0) return false
 
-		const type = Element.displayType(elem)
-		if (!type || !Element.isVisible(elem)||
+		const displayType = this.displayType(elem)
+		if (!displayType || !this.isVisible(elem) ||
 			(!nodeValue && textContent.length == 0)){
 			return false
 		}
 
 		const score = Score.get(elem)
+		if (score == 0 && isText) return false
+
 		if (isText && nodeValue){
-			if (score === 0) return false
 			return {
-				type, score,
+				type: 'text',
+				score,
 				text: textContent,
 			}
-		} else if (Element.isElement(elem)){
+		} else if (this.isElement(elem)){
 			return {
-				type, score,
+				type: displayType,
+				score,
 				tag: tagName.toLowerCase(),
 				element: elem,
 				nodes: []
 			}
 		}
-	},
-
-
-	/**
-	 * parse a HTML element and its children into a VNode tree
-	 * @param root
-	 */
-	parse(root: HTMLElement): VNode{
-		let topScore = 0, topNode = null
-		function recurse(elem){
-			const node = Serializer.create(elem) as VNode
-			if (node.type == 'txt' || !node){
-				return node
-			}
-			const children = elem.childNodes || elem.children
-			for (let i = 0; i < children.length; i++){
-				const childVNode = recurse(children[i])
-				if (childVNode){
-					node.nodes.push(childVNode)
-					node.score += childVNode.score * 0.5
-				}
-			}
-			if (node.score > topScore){
-				topScore = node.score
-				topNode = node
-			}
-			return node
-		}
-		recurse(root)
-		return topNode
 	}
 }

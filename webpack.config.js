@@ -52,9 +52,6 @@ module.exports = (env, argv) => {
 	}
 
 	// mode
-	if (argv.mode === 'development'){
-		config.mode = 'development'
-	}
 	if (argv.mode === 'production') {
 		config.mode = 'production'
 	}

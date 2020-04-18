@@ -1,12 +1,11 @@
 import {NEGATIVE_ATTR, FAVORED_TAGS, PARAGRAPH_TAGS, SECONDARY_TAGS, POSITIVE_ATTR} from "./config";
-import {VNode} from "./serializer";
-
-interface Score {
-    score: number,
-    lvl: number // level set to parent
-}
+import {VNode} from "./types";
 
 export const Score = {
+
+    /**
+     * main entry of calculating the score of a node
+     */
     get(elem: HTMLElement): number{
         let { nodeName, innerText, className, id } = elem,
             score = 0
@@ -27,20 +26,20 @@ export const Score = {
         className = className.toLowerCase()
         id = id.toLowerCase()
         for (let attr of NEGATIVE_ATTR){
-            if (className.indexOf(attr) !== -1 || id.indexOf(attr) !== -1){
-                score -= 15
+            if (className.indexOf(attr) !== -1 || id.indexOf(attr) !== -1 ){
+                score -= 25
             }
         }
         for (let attr of POSITIVE_ATTR){
             if (className.indexOf(attr) !== -1 || id.indexOf(attr) !== -1){
-                score += 25
+                score += 15
             }
         }
 
         // score other element node
         if (FAVORED_TAGS.includes(nodeName)){
             score += 10
-        } else if (nodeName === 'DIV'){
+        } else if (nodeName === 'DIV' && score > 0){
             score += this.div(elem)
         } else if (SECONDARY_TAGS.includes(nodeName)){
             score += 3
@@ -48,6 +47,9 @@ export const Score = {
         return score
     },
 
+    /**
+     * handle text element
+     */
     text(elem): number {
         let {nodeValue, parentElement} = elem,
             parentTag = parentElement.nodeName,
@@ -65,47 +67,73 @@ export const Score = {
             }
             if (PARAGRAPH_TAGS.includes(parentTag)) {
                 score += nodeValue.length
-                score += this.commas(nodeValue)
+                score += this.punctuation(nodeValue)
             }
             return score
         }
         return 0
     },
 
-    commas(text: string): number{
+    /**
+     * score based on number of punctuations
+     * If the text contain numerous common punctuations (such as comma and period), then it is likely to be a proper paragraph or content.
+     * @param text
+     */
+    punctuation(text: string): number{
         return text.match(/,|，|.|。/g).length * 2 || 0
     },
 
+    /**
+     * handle div element
+     * This method takes visual area to be a considerable dimension.
+     * @param elem
+     */
     div(elem: HTMLElement): number{
         const { offsetWidth, offsetHeight, offsetLeft } = elem,
             winWidth = window.innerWidth,
             winHeight = window.innerHeight
-        if (offsetWidth > elem.parentElement.offsetWidth/2){
-            return 1
-        }
 
         // width
-        if (offsetWidth < winWidth/6){
-            return -10
-        } else if (offsetWidth < 200){
+        if (offsetWidth < winWidth/6 || offsetWidth < 200){
             return -5
         }
-
         // height
         if (offsetHeight < 100){
-            return -5
+            return -2
         }
-
         if (offsetWidth + offsetLeft > winWidth/2
-            && offsetHeight > winHeight*0.6){
-            return 20
+            && offsetHeight > winHeight*0.618){
+            return 100
+        }
+        if (offsetWidth > winWidth - 32){
+            return -100
         }
         return 5
     },
 
-    level(node:VNode, childNode:VNode){
-
+    /**
+     * add child score to parent
+     * @param parent
+     * @param child
+     */
+    addToParent(parent:VNode, child:VNode){
+        const { depth } = child,
+            childLength = parent.nodes.length
+        if (child.type === 'text'){
+            parent.depth = 2
+        }
+        if (depth > 0 && depth <= 2){
+            const shallDegrade = (childLength === 0 ||
+                FAVORED_TAGS.includes(child.tag)) &&
+                parent.depth > 0
+            const maxChildDepth = Math.max(depth, ...parent.nodes.map(n=>{
+                    return n.depth || 0
+                }))
+            parent.depth = shallDegrade ? 1 : maxChildDepth - 1
+        }
+        if (child.score > 0 && childLength > 1 && depth > 0 ){
+            parent.score += child.score
+        }
     }
-
 
 }
